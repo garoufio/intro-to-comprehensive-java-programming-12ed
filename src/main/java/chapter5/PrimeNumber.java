@@ -21,7 +21,7 @@ public class PrimeNumber {
         }
       }
       if (isPrime) {
-        System.out.printf("%4d ", i);
+        System.out.printf("%4d", i);
         primeNumbersCount++;
         if (primeNumbersCount % NUMBER_OF_PRIMES_PER_LINE == 0) {
           System.out.println();
