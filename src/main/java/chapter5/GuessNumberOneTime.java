@@ -2,6 +2,9 @@ package chapter5;
 
 import java.util.Scanner;
 
+/**
+ * Generates a random integer in the range [0, 100] and prompts the user to guess that number.
+ */
 public class GuessNumberOneTime {
   
   public static void main(String[] args) {
@@ -20,6 +23,7 @@ public class GuessNumberOneTime {
         System.out.println("Your guess is too high");
       }
     }
+    input.close();
     System.out.printf("Yes, the number is '%d'\n", number);
   }
   
