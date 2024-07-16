@@ -29,7 +29,7 @@ public class Exercise5_14 {
       }
     }
     if (gcd == -1) {
-      System.out.println("No greatest common divisor found");
+      System.out.println("Greatest common divisor not found");
     }
     else {
       System.out.printf("The greatest common divisor is '%d'\n", gcd);
