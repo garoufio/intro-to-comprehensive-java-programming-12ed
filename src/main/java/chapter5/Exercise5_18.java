@@ -38,6 +38,7 @@ public class Exercise5_18 {
         } else {
           System.out.print(" ");
         }
+        if (j > MIN_NUMBER) System.out.print(" ");
       }
       System.out.println();
     }
@@ -51,6 +52,7 @@ public class Exercise5_18 {
         } else {
           System.out.print(" ");
         }
+        if (j < MAX_NUMBER) System.out.print(" ");
       }
       System.out.println();
     }

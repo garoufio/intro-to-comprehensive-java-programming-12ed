@@ -1,7 +1,7 @@
 package chapter5;
 
 /**
- * Displays prime numbers between 2 and 1000 (inclusive).
+ * Displays prime numbers (8 per line) between 2 and 1000 (inclusive).
  */
 public class Exercise5_20 {
   
@@ -13,7 +13,7 @@ public class Exercise5_20 {
     int primeNumbersCount = 0;
     boolean isPrime;
     
-    for (int i = MIN_NUMBER; primeNumbersCount <= MAX_NUMBER; i++) {
+    for (int i = MIN_NUMBER; i <= MAX_NUMBER; i++) {
       isPrime = true;
       for (int j = i / 2; j > 1; j--) {
         if (i % j == 0) {
@@ -29,6 +29,7 @@ public class Exercise5_20 {
         }
       }
     }
+    System.out.printf("'%d' prime numbers where found in the range [%d, %d]\n", primeNumbersCount, MIN_NUMBER, MAX_NUMBER);
   }
   
 }

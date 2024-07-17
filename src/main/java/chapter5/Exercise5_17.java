@@ -19,15 +19,28 @@ public class Exercise5_17 {
       System.exit(1);
     }
     
-    for (int i = 0; i < number; i++) { // rows
-      for (int j = 0, right = 1; j < ((2 * number) - 1); j++) { // columns
-        if (j >= number - 1) {
-          System.out.print(right++);
-        } else {
-          System.out.print(" ");
+    for (int row = 1; row <= number; row++) {
+      // print numbers to the left side
+      for (int left = number; left > 1; left--) {
+        if (left <= row) {
+          System.out.printf("%d", left);
         }
+        else {
+          System.out.printf(" ");
+        }
+        System.out.print(" ");
       }
-      System.out.println("");
+      // print numbers to the right side
+      for (int right = 1; right <= number; right++) {
+        if (right <= row) {
+          System.out.print(right);
+        }
+        else {
+          break;
+        }
+        if (right < number) System.out.print(" ");
+      }
+      System.out.println();
     }
   }
   
