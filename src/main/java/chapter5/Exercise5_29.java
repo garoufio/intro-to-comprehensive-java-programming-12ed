@@ -22,7 +22,7 @@ public class Exercise5_29 {
     }
     System.out.print("Enter first day of year [0-6] (0-Sunday...): ");
     firstDayOfYear = input.nextInt();
-    if (firstDayOfYear < 1 || firstDayOfYear > 7) {
+    if (firstDayOfYear < 0 || firstDayOfYear > 6) {
       System.out.println("Invalid first day of year");
       System.exit(1);
       input.close();
