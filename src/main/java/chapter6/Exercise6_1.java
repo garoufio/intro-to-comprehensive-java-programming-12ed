@@ -6,10 +6,11 @@ package chapter6;
 public class Exercise6_1 {
   
   public static void main(String[] args) {
-    for (int i = 0; i < 100; i++) {
-      if (i != 0 && i % 10 == 0) System.out.println();
-      
-      System.out.printf("%7d ", getPentagonalNumber(i + 1));
+    for (int i = 1; i <= 100; i++) {
+      if (i % 10 == 0) {
+        System.out.printf("%7d\n", getPentagonalNumber(i));
+      }
+      else System.out.printf("%7d ", getPentagonalNumber(i));
     }
   }
   
@@ -18,5 +19,7 @@ public class Exercise6_1 {
   public static int getPentagonalNumber(int n) {
     return (n * (3 * n - 1)) / 2;
   }
+  
+  //-------------------------------------------------------------------------------------------------------------------
   
 }
