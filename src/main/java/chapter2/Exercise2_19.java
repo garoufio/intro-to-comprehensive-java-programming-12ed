@@ -12,7 +12,7 @@ public class Exercise2_19 {
     Scanner input = new Scanner(System.in);
     double pointX1, pointY1, pointX2, pointY2, pointX3, pointY3, area, semiPerimeter, side1, side2, side3;
     
-    System.out.print("Enter the coordindates of three points separated by spaces like x1 y1 x2 y2 x3 y3: ");
+    System.out.print("Enter the coordinates of three points separated by spaces like x1 y1 x2 y2 x3 y3: ");
     pointX1 = input.nextDouble();
     pointY1 = input.nextDouble();
     pointX2 = input.nextDouble();
