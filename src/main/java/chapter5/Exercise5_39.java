@@ -15,10 +15,10 @@ public class Exercise5_39 {
         commission += salesAmount * 0.08;
       }
       else if (salesAmount >= 5000.01 && salesAmount <= 10000) {
-        commission += salesAmount * 0.1;
+        commission += (salesAmount - 5000.0) * 0.1;
       }
       else {
-        commission += salesAmount * 0.12;
+        commission += (salesAmount - 10000.0) * 0.12;
       }
       salesAmount += 0.1;
       
