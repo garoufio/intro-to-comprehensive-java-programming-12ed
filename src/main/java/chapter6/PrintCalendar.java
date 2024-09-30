@@ -12,6 +12,8 @@ public class PrintCalendar {
   public static final int NUMBER_OF_DAYS_IN_YEAR = 365;
   public static final int NUMBER_OF_DAYS_IN_LEAP_YEAR = 366;
   
+  //-------------------------------------------------------------------------------------------------------------------
+  
   public static void main(String[] args) {
 //    for (int i = 1; i <= 12; i++) {
 //      System.out.println(getNumberOfDaysInMonth(i, 2023));
