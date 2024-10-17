@@ -7,8 +7,7 @@ public class ArraySort {
   public static void main(String[] args) {
     int[] list = { 1, 9, 4, 6, 5, -4 };
     selectionSort(list, true);
-    Arrays.stream(list).forEach(a -> System.out.print(a + " "));
-//    Arrays.toString(list);
+    System.out.println(Arrays.toString(list));
   }
   
   //-------------------------------------------------------------------------------------------------------------------
