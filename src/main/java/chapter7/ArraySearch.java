@@ -1,5 +1,8 @@
 package chapter7;
 
+/**
+ * Implementation of binary search and linear search algorithms.
+ */
 public class ArraySearch {
   
   public static void main(String[] args) {
@@ -54,7 +57,6 @@ public class ArraySearch {
         high = mid - 1;
       }
     }
-    
     return -low - 1;
   }
   
