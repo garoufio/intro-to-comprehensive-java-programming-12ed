@@ -36,7 +36,6 @@ public class GradeExam {
         }
       }
     }
-    
     return scores;
   }
   
@@ -65,7 +64,6 @@ public class GradeExam {
         highestScore[1] = scores[i];
       }
     }
-    
     return highestScore;
   }
   
