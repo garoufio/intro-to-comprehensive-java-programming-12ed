@@ -9,13 +9,15 @@ import java.util.Scanner;
 public class Exercise7_2 {
   
   public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    
-    int[] numbers = readIntegers(input);
-    input.close();
-    
-    int[] reversedNumbers = reverseArray(numbers);
-    System.out.println(Arrays.toString(reversedNumbers));
+    int[] numbers;
+    try (Scanner input = new Scanner(System.in)) {
+      numbers = readIntegers(input);
+      int[] reversedNumbers = reverseArray(numbers);
+      System.out.println(Arrays.toString(reversedNumbers));
+    }
+    catch (Exception e) {
+      System.err.println("Invalid input");
+    }    
   }
   
   //-------------------------------------------------------------------------------------------------------------------

@@ -15,14 +15,17 @@ public class Exercise7_3 {
   //-------------------------------------------------------------------------------------------------------------------
   
   public static void main(String[] args) {
-    Scanner input = new Scanner(System.in);
-    int[] numbers = readIntegers(input);
-    input.close();
-    
-    Arrays.sort(numbers);
-    int[] distinctNumbers = getDistinctNumbers(numbers);
-    int[] occurrences = getOccurrences(numbers, distinctNumbers);
-    printNumberOccurrences(distinctNumbers, occurrences);
+    int[] numbers;
+    try (Scanner input = new Scanner(System.in)) {
+      numbers = readIntegers(input);
+      Arrays.sort(numbers);
+      int[] distinctNumbers = getDistinctNumbers(numbers);
+      int[] occurrences = getOccurrences(numbers, distinctNumbers);
+      printNumberOccurrences(distinctNumbers, occurrences);
+    }
+    catch (Exception e) {
+      System.err.println("Invalid input");
+    }
   }
   
   //-------------------------------------------------------------------------------------------------------------------
