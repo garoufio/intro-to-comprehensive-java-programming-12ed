@@ -15,7 +15,6 @@ public class Exercise7_36 {
   
   public static void main(String[] args) {
     int[] queens = new int[CHESS_BOARD_SIZE];
-    Arrays.fill(queens, -1);
     
     play(queens);
     printSolution(queens);
@@ -25,13 +24,13 @@ public class Exercise7_36 {
   
   public static boolean isValidPosition(int[] queens, int position, int currentIndex) {
     if (currentIndex == 0) return true;
-    
+
     int previousIndex = currentIndex - 1;
     int step = 1;
     for (int i = previousIndex; i >= 0; i--) {
       // same column validity check
       if (position == queens[i]) return false;
-      
+
       // same diagonal validity check
       int value = queens[i] - step;
       if (value < 0) value = 0;
@@ -46,20 +45,35 @@ public class Exercise7_36 {
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public static int createRandomNumber(int min, int max) {
-    return (int)(Math.random() * (max - min) + min);
+  public static int findPosition(int[] queens, int numberOfPlacedQueens) {
+    int startingPosition = queens[numberOfPlacedQueens] == -1 ? 0 : queens[numberOfPlacedQueens] + 1;
+    
+    for (int i = startingPosition; i < queens.length; i++) {
+      if (isValidPosition(queens, i, numberOfPlacedQueens)) return i;
+    }
+    return -1; // not valid position found
   }
   
   //-------------------------------------------------------------------------------------------------------------------
   
   public static void play(int[] queens) {
-    int position;
+    int numberOfQueensPlaced, position;
     
-    for (int i = 0; i < queens.length; i++) {
-      do {
-        position = createRandomNumber(0, queens.length); // queens.length is excluded
-      } while (!isValidPosition(queens, position, i));
-      queens[i] = position;
+    // indicates that no queens are placed
+    Arrays.fill(queens, -1);
+    // initially place a queen at (0, 0)
+    queens[0] = 0;
+    numberOfQueensPlaced = 1;
+    while (numberOfQueensPlaced >= 0 && numberOfQueensPlaced < queens.length) {
+      position = findPosition(queens, numberOfQueensPlaced);
+      if (position < 0) {
+        queens[numberOfQueensPlaced] = -1;
+        numberOfQueensPlaced--;
+      }
+      else {
+        queens[numberOfQueensPlaced] = position;
+        numberOfQueensPlaced++;
+      }
     }
   }
   

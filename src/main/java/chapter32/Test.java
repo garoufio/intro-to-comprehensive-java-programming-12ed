@@ -1,4 +1,4 @@
-package chapter7;
+package chapter32;
 
 import java.util.Arrays;
 import java.util.concurrent.*;

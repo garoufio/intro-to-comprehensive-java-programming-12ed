@@ -1,6 +1,14 @@
 package chapter8;
 
-public class GradeExam {
+import chapter7.ArraySort;
+
+import java.util.Arrays;
+
+/**
+ * (Sort students on grades) Rewrite Listing GradeExam.java, to display the students in increasing order of the number
+ * of correct answers.
+ */
+public class Exercise8_3 {
   
   public static void main(String[] args) {
     final char[][] answers = {
@@ -16,9 +24,7 @@ public class GradeExam {
     final char[] keys = { 'D', 'B', 'D', 'C', 'C', 'D', 'A', 'E', 'A', 'D' };
     
     int[] studentScores = gradeAllAnswers(answers, keys);
-    printStudentScores(studentScores);
-    int[] highestScore = findHighestScore(studentScores);
-    System.out.printf("Student %d has the highest score: %d\n", highestScore[0], highestScore[1]);
+    printStudentScores(sortStudentScores(studentScores));
   }
   
   //-------------------------------------------------------------------------------------------------------------------
@@ -41,30 +47,27 @@ public class GradeExam {
   
   //-------------------------------------------------------------------------------------------------------------------
   
+  /* Sorts student scores in increasing order */
+  public static int[] sortStudentScores(int[] scores) {
+    if (scores == null) return null;
+    
+    /* either use sort method from Arrays class or the selection sort method from chapter 7 */
+    int[] sortedScores = new int[scores.length];
+    sortedScores = Arrays.copyOf(scores, scores.length);
+//    Arrays.sort(sortedScores);
+    ArraySort.selectionSort(sortedScores, true);
+    
+    return sortedScores;
+  }
+  
+  //-------------------------------------------------------------------------------------------------------------------
+  
   public static void printStudentScores(int[] scores) {
     if (scores == null) return;
     
     for (int i = 0; i < scores.length; i++) {
       System.out.printf("Student %d's correct count is %d\n", i, scores[i]);
     }
-  }
-  
-  //-------------------------------------------------------------------------------------------------------------------
-  
-  public static int[] findHighestScore(int[] scores) {
-    if (scores == null) return null;
-    
-    int[] highestScore = new int[2];
-    highestScore[0] = 0;  // index
-    highestScore[1] = scores[0];  // correct count
-    
-    for (int i = 1; i < scores.length; i++) {
-      if (scores[i] > highestScore[1]) {
-        highestScore[0] = i;
-        highestScore[1] = scores[i];
-      }
-    }
-    return highestScore;
   }
   
   //-------------------------------------------------------------------------------------------------------------------
