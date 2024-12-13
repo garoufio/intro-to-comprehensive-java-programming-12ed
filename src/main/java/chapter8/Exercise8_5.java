@@ -19,7 +19,10 @@ public class Exercise8_5 {
       printArray(result);
     }
     catch (InputMismatchException e) {
-      System.err.println("Invalid input");
+      System.err.println("Invalid input. Program will exit");
+    }
+    catch (Exception e) {
+      e.printStackTrace();
     }
   }
   
@@ -66,9 +69,7 @@ public class Exercise8_5 {
         if (!inconsistentColumns) inconsistentColumns = true;
       }
     }
-    if (inconsistentColumns) return false;
-    
-    return true;
+    return !inconsistentColumns;
   }
   
   //-------------------------------------------------------------------------------------------------------------------

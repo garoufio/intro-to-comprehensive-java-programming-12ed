@@ -43,7 +43,7 @@ public class Exercise8_1 {
   public static double[][] readArray() {
     double[][] matrix = new double[NUMBER_OF_ROWS][NUMBER_OF_COLUMNS];
     
-    try (Scanner scanner = new Scanner(System.in);) {
+    try (Scanner scanner = new Scanner(System.in)) {
       System.out.printf("Enter a %d-by-%d matrix row by row:\n", NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);
       for (int i = 0; i < NUMBER_OF_ROWS; i++) {
         for (int j = 0; j < NUMBER_OF_COLUMNS; j++) {

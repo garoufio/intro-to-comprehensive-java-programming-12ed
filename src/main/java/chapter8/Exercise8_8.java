@@ -1,5 +1,6 @@
 package chapter8;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -14,8 +15,11 @@ public class Exercise8_8 {
       double[][] points = readPoints(input, numberOfPoints);
       printNearestPoints(points);
     }
+    catch (InputMismatchException e) {
+      System.err.println("Invalid input. Program will exit");
+    }
     catch (Exception e) {
-      System.err.println("Invalid input");
+      e.printStackTrace();
     }
   }
   
@@ -78,7 +82,7 @@ public class Exercise8_8 {
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public static void printNearestPoints(double points[][]) {
+  public static void printNearestPoints(double[][] points) {
     double minDistance = getMinDistance(points);
     double distance;
     

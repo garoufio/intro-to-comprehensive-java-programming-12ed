@@ -36,7 +36,7 @@ public class Exercise8_2 {
   public static double[][] readArray() {
     double[][] matrix = new double[ARRAY_SIZE][ARRAY_SIZE];
     
-    try (Scanner scanner = new Scanner(System.in);) {
+    try (Scanner scanner = new Scanner(System.in)) {
       System.out.printf("Enter a %d-by-%d matrix row by row:\n", ARRAY_SIZE, ARRAY_SIZE);
       for (int i = 0; i < ARRAY_SIZE; i++) {
         for (int j = 0; j < ARRAY_SIZE; j++) {

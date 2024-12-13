@@ -9,7 +9,7 @@ import java.util.Scanner;
  * vertical, or diagonal row on the grid, the game is over and that player has won. A draw (no winner) occurs when all
  * the cells on the grid have been filled with tokens and neither player has achieved a win. Create a program for
  * playing a tic-tac-toe game. The program prompts two players to alternately enter an X token and O token. Whenever a
- * token is entered, the program redisplays the board on the console and determines the status of the game (win, draw,
+ * token is entered, the program displays the board on the console and determines the status of the game (win, draw,
  * or continue).
  */
 public class Exercise8_9 {

@@ -52,8 +52,7 @@ public class Exercise8_3 {
     if (scores == null) return null;
     
     /* either use sort method from Arrays class or the selection sort method from chapter 7 */
-    int[] sortedScores = new int[scores.length];
-    sortedScores = Arrays.copyOf(scores, scores.length);
+    int[] sortedScores = Arrays.copyOf(scores, scores.length);
 //    Arrays.sort(sortedScores);
     ArraySort.selectionSort(sortedScores, true);
     
