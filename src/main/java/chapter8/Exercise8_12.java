@@ -26,7 +26,6 @@ import java.util.Scanner;
  */
 public class Exercise8_12 {
   
-  public static final double EPSILON = 10E-5;
   public static final double[] RATES = { 0.10, 0.15, 0.25, 0.28, 0.33, 0.35 };
   public static final int[][] BRACKETS = {
       { 8350, 33950, 82250, 171550, 372950 },   // Single filer
@@ -106,41 +105,27 @@ public class Exercise8_12 {
   
   public static double computeTax(double income, int filingStatus) {
     double tax;
-    
-    if (income - BRACKETS[filingStatus][0] <= EPSILON) {
-      tax = income * RATES[0];
-    }
-    else if (income - BRACKETS[filingStatus][1] <= EPSILON) {
-      tax = (BRACKETS[filingStatus][0] * RATES[0]) +
-          ((income - BRACKETS[filingStatus][0]) * RATES[1]);
-    }
-    else if (income - BRACKETS[filingStatus][2] <= EPSILON) {
-      tax = (BRACKETS[filingStatus][0] * RATES[0]) +
-          ((BRACKETS[filingStatus][1] - BRACKETS[filingStatus][0]) * RATES[1]) +
-          ((income - BRACKETS[filingStatus][1]) * RATES[2]);
-    }
-    else if (income - BRACKETS[filingStatus][3] <= EPSILON) {
-      tax = (BRACKETS[filingStatus][0] * RATES[0])
-          + ((BRACKETS[filingStatus][1] - BRACKETS[filingStatus][0]) * RATES[1]) +
-          ((BRACKETS[filingStatus][2] - BRACKETS[filingStatus][1]) * RATES[2]) +
-          ((income - BRACKETS[filingStatus][2]) * RATES[3]);
-    }
-    else if (income - BRACKETS[filingStatus][4] <= EPSILON) {
-      tax = (BRACKETS[filingStatus][0] * RATES[0]) +
-          ((BRACKETS[filingStatus][1] - BRACKETS[filingStatus][0]) * RATES[1]) +
-          ((BRACKETS[filingStatus][2] - BRACKETS[filingStatus][1]) * RATES[2]) +
-          ((BRACKETS[filingStatus][3] - BRACKETS[filingStatus][2]) * RATES[3]) +
-          ((income - BRACKETS[filingStatus][3]) * RATES[4]);
+  
+    // Compute tax in the first bracket
+    if (income <= BRACKETS[filingStatus][0]) {
+      return tax = income * RATES[0]; // Done
     }
     else {
-      tax = (BRACKETS[filingStatus][0] * RATES[0]) +
-          ((BRACKETS[filingStatus][1] - BRACKETS[filingStatus][0]) * RATES[1]) +
-          ((BRACKETS[filingStatus][2] - BRACKETS[filingStatus][1]) * RATES[2]) +
-          ((BRACKETS[filingStatus][3] - BRACKETS[filingStatus][2]) * RATES[3]) +
-          ((BRACKETS[filingStatus][4] - BRACKETS[filingStatus][3]) * RATES[4]) +
-          ((income - BRACKETS[filingStatus][4]) * RATES[5]);
+      tax = BRACKETS[filingStatus][0] * RATES[0];
     }
-    return tax;
+
+    // Compute tax in the 2nd, 3rd, 4th, and 5th brackets, if needed
+    for (int i = 1; i < BRACKETS[filingStatus].length; i++) {
+      if (income > BRACKETS[filingStatus][i]) {
+        tax += (BRACKETS[filingStatus][i] - BRACKETS[filingStatus][i - 1]) * RATES[i];
+      }
+      else {
+        tax += (income - BRACKETS[filingStatus][i - 1]) * RATES[i];
+        return tax; // Done
+      }
+    }
+    // Compute tax in the last (i.e., 6th) bracket
+    return  tax += (income - BRACKETS[filingStatus][BRACKETS[filingStatus].length - 1]) * RATES[RATES.length - 1];
   }
   
   //-------------------------------------------------------------------------------------------------------------------
