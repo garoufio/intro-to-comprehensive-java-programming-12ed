@@ -29,7 +29,7 @@ public class Exercise8_16 {
     int[][] sortedArray = new int[m.length][m[0].length];
     System.arraycopy(m, 0, sortedArray, 0, m.length);
     
-    for (int i = 0; i < m.length; i++) {
+    for (int i = 0; i < m.length - 1; i++) {
       minIndex = i;
       minElement = sortedArray[i];
       for (int j = i + 1; j < m.length; j++) {

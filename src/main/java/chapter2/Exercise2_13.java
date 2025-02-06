@@ -11,7 +11,6 @@ public class Exercise2_13 {
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
     double savingAmount, totalAmount, monthlyInterestRate;
-    int months;
     
     System.out.print("Enter the monthly saving amount: ");
     savingAmount = input.nextDouble();

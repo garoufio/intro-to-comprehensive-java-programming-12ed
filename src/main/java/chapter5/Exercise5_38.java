@@ -14,6 +14,7 @@ public class Exercise5_38 {
     
     System.out.print("Enter the decimal value: ");
     decimalValue = input.nextInt();
+    input.close();
     
     if (decimalValue < 0) decimalValue = -decimalValue;
     

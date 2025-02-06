@@ -21,6 +21,7 @@ public class Exercise4_22 {
     else {
       System.out.printf("'%s' is not a substring of '%s'\n", str2, str1);
     }
+    input.close();
   }
   
 }

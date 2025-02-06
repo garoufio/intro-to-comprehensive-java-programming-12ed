@@ -20,6 +20,7 @@ public class Exercise5_32 {
     Scanner input = new Scanner(System.in);
     System.out.print("Enter your lottery pick (two digits): ");
     int guess = input.nextInt();
+    input.close();
     
     // Get digits from guess
     int guessDigit1 = guess / 10;

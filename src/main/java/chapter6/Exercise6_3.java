@@ -12,6 +12,7 @@ public class Exercise6_3 {
     
     System.out.print("Enter an integer number: ");
     int number = input.nextInt();
+    input.close();
     System.out.printf("Is '%d' a palindrome? %b\n", number, isPalindrome(number));
   }
   

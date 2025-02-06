@@ -29,7 +29,7 @@ public class Exercise5_29 {
     }
     input.close();
     
-    String month, day;
+    String month;
     int firsDayOfMonth = firstDayOfYear;
     int numberOfDaysInMonth, daysWritten, daysCount;
     for (int i = 1; i <= 12; i++) {

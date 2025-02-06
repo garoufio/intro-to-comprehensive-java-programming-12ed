@@ -12,6 +12,7 @@ public class Palindrome {
     
     System.out.print("Enter a string: ");
     String str = input.nextLine();
+    input.close();
     
     int len = str.length();
     boolean isPalindrome = true;

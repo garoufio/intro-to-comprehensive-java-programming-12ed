@@ -20,10 +20,11 @@ public class Exercise8_13 {
     try (Scanner input = new Scanner(System.in)) {
       int[] dimensions = readArrayDimensions(input);
       double[][] array = read2DArray(input, dimensions[0], dimensions[1]);
-      int[] minElementLocation = getLocationOfLargestElement(array);
+      int[] maxElementLocation = getLocationOfLargestElement(array);
+      double maxElement = array[maxElementLocation[0]][maxElementLocation[1]];
       System.out.printf(
-          "The location of the largest element is at (%d, %d)\n",
-          minElementLocation[0], minElementLocation[1]
+          "The location of the largest element '%f' is at (%d, %d)\n",
+          maxElement, maxElementLocation[0], maxElementLocation[1]
       );
     }
     catch (InputMismatchException e) {

@@ -13,6 +13,7 @@ public class Exercise5_48 {
     
     System.out.print("Enter a string: ");
     str = input.nextLine();
+    input.close();
     
     if (str.length() > 0) {
       for (int i = 0; i < str.length(); i++) {

@@ -24,6 +24,7 @@ public class Exercise4_9 {
       default:
         System.out.println("Invalid number of characters");
     }
+    input.close();
   }
   
 }

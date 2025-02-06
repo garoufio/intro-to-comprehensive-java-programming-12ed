@@ -30,6 +30,7 @@ public class Exercise5_2 {
         System.out.printf("Wrong! The correct result is '%d'\n", result);
       }
     }
+    input.close();
     long endTime = System.currentTimeMillis();
     System.out.printf("You answered correctly in %d/%d\n", correctAnswersCount, NUMBER_OF_REPEATS);
     System.out.printf("Elapsed time: %d seconds\n", (endTime - startTime) / 1000);

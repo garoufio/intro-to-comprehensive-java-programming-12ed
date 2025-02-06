@@ -74,9 +74,7 @@ public class Exercise7_37 {
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public static void printSlots(int[] slots) {
-    boolean displaySlot;
-    
+  public static void printSlots(int[] slots) {    
     for (int i = 0; i < slots.length; i++) {
       for (int j = 0; j < slots.length; j++) {
         if (slots[j] == 0) System.out.print(" ");
