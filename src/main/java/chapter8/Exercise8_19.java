@@ -26,7 +26,7 @@ public class Exercise8_19 {
   
   public static boolean isValid(int size, String msg) {
     if (size <= 0) {
-      System.out.printf("%s size must be greater than '0'\n", msg, size);
+      System.out.printf("%s size must be greater than '0'\n", msg);
       return false;
     }
     return true;
@@ -35,7 +35,7 @@ public class Exercise8_19 {
   //-------------------------------------------------------------------------------------------------------------------
   
   public static int readSize(Scanner sc, String msg) {
-    int size = 0;
+    int size;
     
     do {
       System.out.printf("Enter %s size: ", msg);
@@ -65,11 +65,11 @@ public class Exercise8_19 {
   
   public static boolean checkRows(int[][] values) {
     boolean hasConsecutiveFour;
-    for (int row = 0; row < values.length; row++) { // check every row
-      for (int column = 0; column <= values[row].length - 4; column++) {
+    for (int[] row : values) { // check every row
+      for (int column = 0; column <= row.length - 4; column++) {
         hasConsecutiveFour = true;
         for (int i = column; i < column + 3; i++) { // check columns by a window of 4 values
-          if (values[row][i] != values[row][i + 1]) {
+          if (row[i] != row[i + 1]) {
             hasConsecutiveFour = false;
             break;
           }
