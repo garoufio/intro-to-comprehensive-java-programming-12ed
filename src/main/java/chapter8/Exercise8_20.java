@@ -101,10 +101,10 @@ public class Exercise8_20 {
   //-------------------------------------------------------------------------------------------------------------------
   
   public static void printMatrix(char[][] board) {
-    for (int row = 0; row < board.length; row++) {
+    for (char[] row : board) {
       System.out.print("|");
-      for (int column = 0; column < board[row].length; column++) {
-        System.out.printf("%c|", board[row][column]);
+      for (int item : row) {
+        System.out.printf("%c|", item);
       }
       System.out.println();
     }
@@ -181,11 +181,11 @@ public class Exercise8_20 {
     initializeBoard(board);
     
     boolean isRed = true;
-    int numberOfplays = 0;
+    int numberOfPlays = 0;
     int column;
     for (;;) {
       if (isBoardFull(board)) {
-        System.out.printf("It's a tie!\n");
+        System.out.println("It's a tie!");
         break;
       }
       
@@ -201,11 +201,12 @@ public class Exercise8_20 {
       }
       
       if (isConsecutiveFour(board)) {
+        printMatrix(board);
         System.out.printf("The '%s' player won\n", isRed ? "red" : "yellow");
         break;
       }
-      numberOfplays++;
-      isRed = numberOfplays % 2 == 0;
+      numberOfPlays++;
+      isRed = numberOfPlays % 2 == 0;
     }
   }
   
