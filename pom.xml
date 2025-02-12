@@ -19,19 +19,20 @@
     <dependency>
       <groupId>org.junit.jupiter</groupId>
       <artifactId>junit-jupiter</artifactId>
-      <version>RELEASE</version>
+      <version>5.11.4</version>
       <scope>test</scope>
     </dependency>
-<!--    <dependency>-->
-<!--      <groupId>org.projectlombok</groupId>-->
-<!--      <artifactId>lombok</artifactId>-->
-<!--      <scope>annotationProcessor</scope>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--      <groupId>org.postgresql</groupId>-->
-<!--      <artifactId>postgresql</artifactId>-->
-<!--      <version>42.7.4</version>-->
-<!--    </dependency>-->
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.34</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <version>42.7.4</version>
+    </dependency>
   </dependencies>
 
 </project>
