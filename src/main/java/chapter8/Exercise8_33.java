@@ -6,6 +6,7 @@ import java.util.Scanner;
 /**
  * (Geometry: polygon subareas) A convex four-vertex polygon is divided into four triangles. The program prompts the
  * user to enter the coordinates of four vertices and displays the areas of the four triangles in increasing order.
+ * The area of the triangle is calculated using the Heron's formula.
  */
 public class Exercise8_33 {
   
@@ -18,8 +19,7 @@ public class Exercise8_33 {
       for (double area : areas) {
         System.out.printf("%.2f\n", area);
       }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -27,11 +27,12 @@ public class Exercise8_33 {
   //-------------------------------------------------------------------------------------------------------------------
   
   public static double getTriangleArea(double[][] points) {
-    double side1 = Math.pow(Math.pow(points[1][0] - points[0][0], 2) + Math.pow(points[1][1] - points[0][1], 2), 0.5);
-    double side2 = Math.pow(Math.pow(points[2][0] - points[1][0], 2) + Math.pow(points[2][1] - points[1][1], 2), 0.5);
-    double side3 = Math.pow(Math.pow(points[2][0] - points[0][0], 2) + Math.pow(points[2][1] - points[0][1], 2), 0.5);
-    double semiPerimeter = (side1 + side2 + side3) / 2;
-    return Math.pow(semiPerimeter * (semiPerimeter - side1) * (semiPerimeter - side2) * (semiPerimeter - side3), 0.5);
+    // calculate the length of each side
+    double side1 = Math.sqrt(Math.pow(points[1][0] - points[0][0], 2) + Math.pow(points[1][1] - points[0][1], 2));
+    double side2 = Math.sqrt(Math.pow(points[2][0] - points[1][0], 2) + Math.pow(points[2][1] - points[1][1], 2));
+    double side3 = Math.sqrt(Math.pow(points[2][0] - points[0][0], 2) + Math.pow(points[2][1] - points[0][1], 2));
+    double semiPerimeter = (side1 + side2 + side3) / 2.0;
+    return Math.sqrt(semiPerimeter * (semiPerimeter - side1) * (semiPerimeter - side2) * (semiPerimeter - side3));
   }
   
   //-------------------------------------------------------------------------------------------------------------------
@@ -40,8 +41,16 @@ public class Exercise8_33 {
     double[] areas = new double[4];
     double[][] triangle = new double[3][2];
     
-    
-    
+    int index = 0;
+    for (int i = 0; i < points[0].length; i++) {
+      for (int j = i + 1; j < points.length; j++) {
+        for (int k = j + 1; k < points.length; k++) {
+          copy(points, triangle, i, j, k);
+          areas[index] = getTriangleArea(triangle);
+          index++;
+        }
+      }
+    }
     Arrays.sort(areas);
     return areas;
   }
@@ -58,6 +67,15 @@ public class Exercise8_33 {
       }
     }
     return points;
+  }
+  
+  //-------------------------------------------------------------------------------------------------------------------
+  
+  public static void copy(double[][] source, double[][] target, int ...indices) {
+    for (int i = 0; i < target.length; i++) {
+      target[i][0] = source[indices[i]][0];
+      target[i][1] = source[indices[i]][1];
+    }
   }
   
   //-------------------------------------------------------------------------------------------------------------------

@@ -21,10 +21,9 @@ public class Exercise8_31 {
         System.out.println("The two lines are parallel");
       }
       else {
-        System.out.println("");
+        System.out.printf("The intersecting point is at (%f, %f)\n", intersectingPoint[0], intersectingPoint[1]);
       }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
@@ -44,11 +43,8 @@ public class Exercise8_31 {
     if (Math.abs(divisor) < 0.0001) {
       return null;
     }
-    else {
-      double x = ((e * d) - (b * f)) / divisor;
-      double y = ((a * f) - (e * c)) / divisor;
-      System.out.printf("The intersecting point is at (%f, %f)\n", x, y);
-    }
+    intersectingPoint[0] = ((e * d) - (b * f)) / divisor;
+    intersectingPoint[1] = ((a * f) - (e * c)) / divisor;
     return intersectingPoint;
   }
   

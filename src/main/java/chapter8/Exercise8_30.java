@@ -24,8 +24,7 @@ public class Exercise8_30 {
       else {
         System.out.printf("The equation has '%d' solutions: '%.2f' and '%.2f'\n", result.length, result[0], result[1]);
       }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

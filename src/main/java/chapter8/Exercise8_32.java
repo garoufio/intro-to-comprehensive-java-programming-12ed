@@ -20,8 +20,7 @@ public class Exercise8_32 {
       else {
         System.out.printf("The area of the triangle is '%.2f'\n", area);
       }
-    }
-    catch (Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
