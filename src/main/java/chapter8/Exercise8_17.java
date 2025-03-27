@@ -25,8 +25,12 @@ public class Exercise8_17 {
       double safeBalanceLimit = readAmount(sc, "Enter safe balance limit: ");
       double[][] data = readLoans(sc, numberOfBanks);
       
-      int[] unsafeBanks = findUnsafeBanks(data);
-      printArray(unsafeBanks, "Unsafe banks are ");
+      for (double[] d : data) {
+        System.out.println(Arrays.toString(d));
+      }
+      
+      //int[] unsafeBanks = findUnsafeBanks(data);
+      //printArray(unsafeBanks, "Unsafe banks are ");
     }
     catch (InputMismatchException e) {
       System.err.println("Invalid input: " + e.getMessage());
