@@ -1,14 +1,13 @@
 package chapter8;
 
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
- * (Largest block) Given a square matrix with the elements 0 or 1, write a program to find a maximum square submatrix
+ * (Largest block) Given a square matrix with the elements 0 or 1, write a program to find a maximum square sub-matrix
  * whose elements are all 1s. The program prompts the user to enter the number of rows in the matrix and then displays
- * the location of the first element in the maximum square submatrix and the number of rows in the submatrix. The
+ * the location of the first element in the maximum square sub-matrix and the number of rows in the sub-matrix. The
  * return value is an array that consists of three values. The first two values are the row and column indices for the
- * first element in the submatrix, and the third value is the number of the rows in the submatrix.
+ * first element in the sub-matrix, and the third value is the number of the rows in the sub-matrix.
  */
 public class Exercise8_35 {
   
@@ -25,7 +24,7 @@ public class Exercise8_35 {
         );
       }
       else {
-        System.out.println("There is no square submatrix");
+        System.out.println("There is no square sub-matrix");
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -35,25 +34,26 @@ public class Exercise8_35 {
   //-------------------------------------------------------------------------------------------------------------------
   
   public static int[] findLargestBLock(int[][] m) {
-    int[] block = new int[3]; // (#row, #column, len
-    int row, col, len = 0;
+    int[] block = new int[3]; // #row, #column, len
+    int[] vector;
     
-//    1 0 1 0 1
-//    1 1 1 0 1
-//    1 0 1 1 1
-//    1 0 1 1 1
-//    1 0 1 1 1
+    if (m == null || m.length == 0 || m[0].length == 0) return block;
+    
     for (int maxLen = m.length; maxLen > 1; maxLen--) {
-      // generate n x n array of 1s
-      int[][] arrayOf1s = generateArraysOf1s(maxLen);
-      // extract n x n subarray from array
-      int[][] subArray = new int[1][1];
-      // compare arrays
-      if (compare2DArrays(arrayOf1s, subArray)) {
-        block[0] = maxLen;
-        block[1] = maxLen;
-        block[2] = maxLen;
-        break;
+      for (int row = 0; row + maxLen <= m.length; row++) {
+        for (int col = 0; col + maxLen <= m[row].length; col++) {
+          vector = flattenMatrix(extractSquareSubMatrix(m, row, col, maxLen));
+          if (vector == null) continue;
+          
+          //System.out.println(maxLen + ":" + Arrays.toString(vector));
+          
+          if (isAll1s(vector)) {
+            block[0] = row;
+            block[1] = col;
+            block[2] = maxLen;
+            return block;
+          }
+        }
       }
     }
     return block;
@@ -61,39 +61,41 @@ public class Exercise8_35 {
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public static int[][] generateArraysOf1s(int n) {
-    int[][] matrix = new int[n][n];
-    for (int[] row : matrix) {
-      Arrays.fill(row, 1);
+  public static int[][] extractSquareSubMatrix(int[][] m, int fromRow, int fromColumn, int len) {
+    if (m == null || m.length == 0 || m[0].length == 0) return null;
+    
+    int[][] subMatrix = new int[len][len];
+    for (int i = 0, row = fromRow; (i < len) && (fromRow + len <= m.length); i++, row++) {
+      for (int j = 0, col = fromColumn; (j < len) && (fromColumn + len <= m[row].length); j++, col++) {
+        subMatrix[i][j] = m[row][col];
+      }
     }
-    return matrix;
+    return subMatrix;
   }
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public static int[][] extractSubArray(int[][] m, int row, int col, int len) {
-    int[][] subArray = new int[len][len];
+  public static int[] flattenMatrix(int[][] m) {
+    if (m == null || m.length == 0 || m[0].length == 0) return null;
     
-    for (int i = row; i < row + len && i < m.length; i++) {
-      for (int j = col; j < col + len && i < m[i].length; j++) {
-        subArray[i][j] = m[i][j];
+    int[] vector = new int[m.length * m[0].length];
+    int index = 0;
+    for (int row = 0; row < m.length; row++) {
+      for (int col = 0; col < m[row].length; col++) {
+        vector[index] = m[row][col];
+        index++;
       }
     }
-    return subArray;
+    return vector;
   }
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public static boolean compare2DArrays(int[][] m1, int[][] m2) {
-    if (m1 == null || m2 == null) return false;
-    if (m1.length != m2.length) return false;
+  public static boolean isAll1s(int[] v) {
+    if (v == null || v.length == 0) return false;
     
-    for (int i = 0; i < m1.length; i++) {
-      if (m1[i].length != m2[i].length) return false;
-      
-      for (int j = 0; j < m1[i].length; j++) {
-        if (m1[i][j] != m2[i][j]) return false;
-      }
+    for (int i : v) {
+      if (i != 1) return false;
     }
     return true;
   }
