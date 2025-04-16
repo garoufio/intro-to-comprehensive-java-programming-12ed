@@ -23,20 +23,27 @@ public class Exercise8_17 {
     try (Scanner sc = new Scanner(System.in)) {
       int numberOfBanks = readNumberOfBanks(sc, "Enter number of banks: ");
       double safeBalanceLimit = readAmount(sc, "Enter safe balance limit: ");
-      double[][] data = readLoans(sc, numberOfBanks);
+      double[][] loanData = readLoans(sc, numberOfBanks);
+      int[][] borrowers = createBorrowers(loanData);
+      double[] totalAssets = computeTotalAssets(loanData);
+      int[] unsafeBanks = findUnsafeBanks(borrowers, totalAssets, safeBalanceLimit);
+      //printArray(unsafeBanks, "Unsafe Banks are ");
       
-      for (double[] d : data) {
-        System.out.println(Arrays.toString(d));
+//      for (double[] d : loanData) {
+//        System.out.println(Arrays.toString(d));
+//      }
+      for (int[] b : borrowers) {
+        System.out.println("Borrower: " + Arrays.toString(b));
       }
-      
-      //int[] unsafeBanks = findUnsafeBanks(data);
-      //printArray(unsafeBanks, "Unsafe banks are ");
+      System.out.println("Total assets: " + Arrays.toString(totalAssets));
     }
     catch (InputMismatchException e) {
       System.err.println("Invalid input: " + e.getMessage());
     }
   }
   
+  //-------------------------------------------------------------------------------------------------------------------
+  // Validations
   //-------------------------------------------------------------------------------------------------------------------
   
   private static boolean validateNumberOfBanks(int numberOfBanks) {
@@ -70,6 +77,8 @@ public class Exercise8_17 {
     return true;
   }
   
+  //-------------------------------------------------------------------------------------------------------------------
+  // Parse input
   //-------------------------------------------------------------------------------------------------------------------
   
   public static int readNumberOfBanks(Scanner sc, String msg) {
@@ -132,7 +141,7 @@ public class Exercise8_17 {
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public double computeTotalAsset(double[] row) {
+  public static double computeTotalAsset(double[] row) {
     double sum;
     
     sum = row[0];
@@ -146,11 +155,57 @@ public class Exercise8_17 {
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public static int[] findUnsafeBanks(double[][] data) {
-    int[] banks = new int[data.length];
+  public static double[] computeTotalAssets(double[][] data) {
+    if (data == null) return null;
+    
+    double[] assets = new double[data.length];
+    int index = 0;
+    for (double[] d : data) {
+      assets[index] = computeTotalAsset(d);
+      index++;
+    }
+    return assets;
+  }
+  
+  //-------------------------------------------------------------------------------------------------------------------
+  
+  public static int[][] createBorrowers(double[][] data) {
+    if (data == null) return null;
+    
+    int totalNumberOfBorrowers = 0;
+    for (double[] d : data) {
+      totalNumberOfBorrowers += (int) d[1];
+    }
+    
+    int index = 0;
+    int[][] borrowers = new int[totalNumberOfBorrowers][2];
+    for (int i = 0; i < data.length; i++) {
+      for (int j = 2, k = 0; j < data[i].length && k < data[i][1]; j += 2, k++) {
+        borrowers[index][0] = i;  // lender
+        borrowers[index][1] = (int)data[i][j];  // borrower
+        index++;
+      }
+    }
+    return borrowers;
+  }
+  
+  //-------------------------------------------------------------------------------------------------------------------
+  
+  public static int[] findUnsafeBanks(int[][] borrowers, double[] assets, double limit) {
+    if (borrowers == null || assets == null) return null;
+    
+    int[] banks = new int[assets.length];
     Arrays.fill(banks, -1);
     
-    
+    for (int i = 0; i < assets.length; i++) {
+      if (Math.abs(assets[i] - limit) < 0.0001) {
+        for (int row = 0; row < borrowers.length; row++) {
+          if (borrowers[row][1] == i) {
+            // TODO
+          }
+        }
+      }
+    }
     
     return banks;
   }
