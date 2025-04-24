@@ -24,18 +24,9 @@ public class Exercise8_17 {
       int numberOfBanks = readNumberOfBanks(sc, "Enter number of banks: ");
       double safeBalanceLimit = readAmount(sc, "Enter safe balance limit: ");
       double[][] loanData = readLoans(sc, numberOfBanks);
-      int[][] borrowers = createBorrowers(loanData);
-      double[] totalAssets = computeTotalAssets(loanData);
-      int[] unsafeBanks = findUnsafeBanks(borrowers, totalAssets, safeBalanceLimit);
-      //printArray(unsafeBanks, "Unsafe Banks are ");
+      int[] unsafeBanks = findUnsafeBanks(loanData, safeBalanceLimit);
       
-//      for (double[] d : loanData) {
-//        System.out.println(Arrays.toString(d));
-//      }
-      for (int[] b : borrowers) {
-        System.out.println("Borrower: " + Arrays.toString(b));
-      }
-      System.out.println("Total assets: " + Arrays.toString(totalAssets));
+      printArray(unsafeBanks, "Unsafe banks are: ");
     }
     catch (InputMismatchException e) {
       System.err.println("Invalid input: " + e.getMessage());
@@ -155,6 +146,22 @@ public class Exercise8_17 {
   
   //-------------------------------------------------------------------------------------------------------------------
   
+  public static double computeTotalAsset(double[] row, int excludeBank) {
+    double sum;
+    
+    sum = row[0];
+    if (row[1] > 0) {
+      for (int i = 3; i < row.length; i += 2) {
+        if (row[i - 1] == excludeBank) continue;
+        
+        sum += row[i];
+      }
+    }
+    return sum;
+  }
+  
+  //-------------------------------------------------------------------------------------------------------------------
+  
   public static double[] computeTotalAssets(double[][] data) {
     if (data == null) return null;
     
@@ -191,21 +198,45 @@ public class Exercise8_17 {
   
   //-------------------------------------------------------------------------------------------------------------------
   
-  public static int[] findUnsafeBanks(int[][] borrowers, double[] assets, double limit) {
-    if (borrowers == null || assets == null) return null;
+  public static int[] findUnsafeBanks(double[][] data, double limit) {
+    if (data == null) return null;
     
+    boolean isUnsafe;
+    int[][] borrowers = createBorrowers(data);
+    double[] assets = computeTotalAssets(data);
+    
+    int index = 0;
     int[] banks = new int[assets.length];
     Arrays.fill(banks, -1);
     
-    for (int i = 0; i < assets.length; i++) {
-      if (Math.abs(assets[i] - limit) < 0.0001) {
-        for (int row = 0; row < borrowers.length; row++) {
-          if (borrowers[row][1] == i) {
-            // TODO
+    do {
+      isUnsafe = false;
+      
+      for (int i = 0; i < assets.length; i++) {
+        boolean found = false;
+//        if (Math.abs(assets[i] - limit) < 0.0001) {
+        if (assets[i] < limit) {
+          for (int b : banks) {
+            if (b == -1) break;
+            if (b == i) found = true;
           }
+          if (found == false ) {
+            banks[index] = i;
+            System.out.println(i);
+            index++;
+          }
+          
+          // compute the new assets
+          for (int b[] : borrowers) {
+            if (b[1] != i) continue;
+            
+            // compute total asset ignoring the found unsafe bank
+            assets[b[0]] = computeTotalAsset(data[b[0]], b[1]);
+          }
+          isUnsafe = true;
         }
       }
-    }
+    } while (isUnsafe);
     
     return banks;
   }
