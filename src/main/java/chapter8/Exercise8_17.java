@@ -131,6 +131,18 @@ public class Exercise8_17 {
   }
   
   //-------------------------------------------------------------------------------------------------------------------
+  // Helpers
+  //-------------------------------------------------------------------------------------------------------------------
+  
+  public static int[] truncateArray(int[] array, int delimiter) {
+    int toIndex;
+    for (toIndex = 0; toIndex < array.length; toIndex++) {
+      if (array[toIndex] == delimiter) break;
+    }
+    return Arrays.copyOfRange(array, 0, toIndex);
+  }
+  
+  //-------------------------------------------------------------------------------------------------------------------
   
   public static double computeTotalAsset(double[] row) {
     double sum;
@@ -213,32 +225,33 @@ public class Exercise8_17 {
       isUnsafe = false;
       
       for (int i = 0; i < assets.length; i++) {
-        boolean found = false;
-//        if (Math.abs(assets[i] - limit) < 0.0001) {
+        boolean exists = false;
+        // check if bank's asset is below safe limit
         if (assets[i] < limit) {
+          // check if bank is already marked as unsafe
           for (int b : banks) {
-            if (b == -1) break;
-            if (b == i) found = true;
+            if (b == i) exists = true;
           }
-          if (found == false ) {
+          // if bank is already marked as unsafe, then ignore it
+          if (exists) continue;
+          else {
+            isUnsafe = true;
             banks[index] = i;
-            System.out.println(i);
+            
+            // compute new assets
+            for (int j = 0; j < assets.length; j++) {
+              assets[j] = computeTotalAsset(data[j], banks[index]);
+            }
             index++;
           }
-          
-          // compute the new assets
-          for (int b[] : borrowers) {
-            if (b[1] != i) continue;
-            
-            // compute total asset ignoring the found unsafe bank
-            assets[b[0]] = computeTotalAsset(data[b[0]], b[1]);
-          }
-          isUnsafe = true;
         }
       }
     } while (isUnsafe);
     
-    return banks;
+    // truncate array by removing -1 values and sorts the truncated array
+    int[] sortedBanks = truncateArray(banks, -1);
+    Arrays.sort(sortedBanks);
+    return sortedBanks;
   }
   
   //-------------------------------------------------------------------------------------------------------------------

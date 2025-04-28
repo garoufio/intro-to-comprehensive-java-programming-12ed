@@ -5,8 +5,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.util.Arrays;
-
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -66,10 +64,8 @@ public class Exercise8_17Test {
   @Test
   @DisplayName("Unsafe banks")
   public void testUnsafeBanks() {
-    int[] unsafeBanksExpected = new int[]{ 1, 3 , -1, -1, -1};
+    int[] unsafeBanksExpected = new int[]{ 1, 3};
     int[] unsafeBanksActual = Exercise8_17.findUnsafeBanks(data, minSafeAmount);
-    
-    System.out.println(Arrays.toString(unsafeBanksActual));
     
     assertArrayEquals(unsafeBanksExpected, unsafeBanksActual, () -> "List of unsafe banks is different");
   }
